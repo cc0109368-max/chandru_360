@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">CHAN<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="greeting">Hello, I'm</p>
+            <h1>CHANDRU</h1>
+            <h2>Full Stack Developer</h2>
+            <p class="tagline">I craft beautiful digital experiences</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary">View Work</a>
+                <a href="#contact" class="btn secondary">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="avatar">JD</div>
+                </div>
+                <div class="about-text">
+                    <p>I'm a passionate developer with 5+ years of experience building web applications. I specialize in
+                        creating robust, user-friendly solutions using modern technologies.</p>
+                    <div class="stats">
+                        <div class="stat"><span>50+</span>Projects</div>
+                        <div class="stat"><span>30+</span>Clients</div>
+                        <div class="stat"><span>5+</span>Years</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>HTML/CSS</h3>
+                    <div class="bar">
+                        <div style="width:95%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>JavaScript</h3>
+                    <div class="bar">
+                        <div style="width:90%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>React</h3>
+                    <div class="bar">
+                        <div style="width:88%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Node.js</h3>
+                    <div class="bar">
+                        <div style="width:85%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img gradient-1">E-Commerce</div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured online store with payments</p>
+                    <div class="tags"><span>React</span><span>Node.js</span></div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img gradient-2">Dashboard</div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time data visualization</p>
+                    <div class="tags"><span>Vue.js</span><span>D3.js</span></div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img gradient-3">Social</div>
+                    <h3>Social Media App</h3>
+                    <p>Real-time messaging platform</p>
+                    <div class="tags"><span>React</span><span>Socket.io</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Message" rows="5" required></textarea>
+                <button type="submit" class="btn primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 John Doe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Typing Effect for Hero
+        const titles = ['Full Stack Developer', 'UI/UX Designer', 'Problem Solver', 'Tech Enthusiast'];
+        let titleIndex = 0, charIndex = 0, isDeleting = false;
+
+        function typeEffect() {
+            const h2 = document.querySelector('.hero h2');
+            const currentTitle = titles[titleIndex];
+
+            if (isDeleting) {
+                h2.textContent = currentTitle.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                h2.textContent = currentTitle.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentTitle.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+            }
+
+            setTimeout(typeEffect, isDeleting ? 50 : 100);
+        }
+        typeEffect();
+
+        // Smooth Scroll Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(anchor.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.skill-card, .project-card, .about-content, .contact-form').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero-content');
+            if (hero) hero.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+        });
+
+        // Active Nav Link on Scroll
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('section[id]').forEach(section => {
+                const top = section.offsetTop - 100;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (window.scrollY >= top && window.scrollY < top + section.offsetHeight) {
+                    link?.classList.add('active');
+                } else {
+                    link?.classList.remove('active');
+                }
+            });
+        });
+
+        // Form Submit Handler
+        document.querySelector('.contact-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = '✓ Sent!';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                e.target.reset();
+                setTimeout(() => {
+                    btn.textContent = 'Send Message';
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>
